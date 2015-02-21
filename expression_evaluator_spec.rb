@@ -25,7 +25,7 @@ describe ExpressionEvaluator do
 
   context 'not expression' do
     let(:data) { {'country' => 'usa', 'os_version' => '6.1.1'} }
-    let(:expression) { JSON.generate({'not' => {'country' => 'iran'}})}
+    let(:expression) { JSON.generate({'not' => [{'country' => 'iran'}]})}
     it { is_expected.to be_truthy }
   end
 
@@ -45,9 +45,9 @@ describe ExpressionEvaluator do
                                         [{'country' => 'usa'},
                                          {'language' => 'spanish'}]},
                                        {'not' =>
-                                         {'or' =>
+                                         [{'or' =>
                                           [{'app_version' => '0.2'},
-                                           {'os_version' => '7.0.0'}]}}]}) }
+                                           {'os_version' => '7.0.0'}]}]}]}) }
     it { is_expected.to be_falsy }
   end
 

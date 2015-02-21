@@ -9,9 +9,7 @@ Expression Format
 =================
 Expressions are JSON hashes of arrays of hashes
 
-And/or expressions should have 'and'/'or' as the key and an array of two hashes as the value `{'and' => [{'country' => 'usa'}, {'os_version' => '6.1.1'}]}`
-
-Not expressions should have 'not' as the key and the negated expression hash as the value `{'not' => {'country' => 'usa'}}`
+Operator expressions should have the operator as the key and an array of hashes as the value `{'and' => [{'country' => 'usa'}, {'os_version' => '6.1.1'}]}`
 
 Leaf/equality expressions should have the key as the key and the value as the value `{'country' => 'usa'}`
 

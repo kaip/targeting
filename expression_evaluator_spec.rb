@@ -74,4 +74,10 @@ describe ExpressionEvaluator do
     let(:expression) { JSON.generate({'satisfaction' => 0.54}) }
     it { is_expected.to be_truthy }
   end
+
+  context 'empty string' do
+    let(:data) {{'country' => 'usa'}}
+    let(:expression) { JSON.generate({'language' => ''}) }
+    it { is_expected.to be_falsy }
+  end
 end

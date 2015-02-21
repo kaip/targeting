@@ -20,6 +20,8 @@ So the expression `(((country == 'usa') or (language == 'spanish')) and (not ((a
 
 Notes
 =====
-This engine supports arbitrary values (just include them in the data and expression hash)
+This engine supports arbitrary properties (just include them in the data and expression hash)
 
-It supports string, int, float, or boolean values
+It supports string, int, float, or boolean properties
+
+It assumes properties not given in the data are nil, which is not the same as ''

@@ -1,22 +1,6 @@
-class Runner
-  def initialize(data, expression)
-    @data = data
-    @expression = JSON.parse(expression)
-  end
+require 'json'
+require_relative 'expression_evaluator'
 
-  def data_matches_expression?(expression = nil)
-    expression = @expression if expression.nil?
-    case expression.keys.first
-    when 'and'
-      data_matches_expression?(expression.values.first.first) &&
-      data_matches_expression?(expression.values.first.last)
-    when 'not'
-      !data_matches_expression?(expression.values.first)
-    when 'or'
-      data_matches_expression?(expression.values.first.first) ||
-      data_matches_expression?(expression.values.first.last)
-    else
-      @data[expression.keys.first] == expression.values.first
-    end
-  end
-end
+data = JSON.parse(ARGV.first)
+expression = ARGV.last
+puts ExpressionEvaluator.new(data, expression).data_matches_expression?

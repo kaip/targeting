@@ -80,4 +80,15 @@ describe ExpressionEvaluator do
     let(:expression) { JSON.generate({'language' => ''}) }
     it { is_expected.to be_falsy }
   end
+
+  context 'multiple ands' do
+    let(:data) { {'country' => 'usa',
+                  'os_version' => '6.1.1',
+                  'language' => 'english',
+                  'app_version' => '0.2'} }
+    let(:expression) { JSON.generate({'and' => [{'country' => 'usa'},
+                                                {'os_version' => '6.1.1'},
+                                                {'language' => 'english'}]}) }
+    it { is_expected.to be_truthy }
+  end
 end

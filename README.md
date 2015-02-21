@@ -23,3 +23,7 @@ This engine supports arbitrary properties (just include them in the data and exp
 It supports string, int, float, or boolean properties
 
 It assumes properties not given in the data are nil, which is not the same as ''
+
+It supports the operators: and, or, not
+
+And/or can have arbitrary number of subexpressions: {'or' => [{'country' => 'usa'}, {'country' => 'canada'}, {'country' => 'england'}]} is equivalent to country == 'usa' or country == 'canada' or country == 'england'

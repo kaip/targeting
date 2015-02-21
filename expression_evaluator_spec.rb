@@ -50,4 +50,10 @@ describe ExpressionEvaluator do
                                            {'os_version' => '7.0.0'}]}}]}) }
     it { is_expected.to be_falsy }
   end
+
+  context 'arbitrary values' do
+    let(:data) {{'purchase' => 'true'}}
+    let(:expression) {JSON.generate({'purchase' => 'true'})}
+    it { is_expected.to be_truthy }
+  end
 end

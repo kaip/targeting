@@ -28,4 +28,26 @@ describe Runner do
     let(:expression) { JSON.generate({'not' => {'country' => 'iran'}})}
     it { is_expected.to be_truthy }
   end
+
+  context 'or expression' do
+    let(:data) { {'country' => 'usa', 'os_version' => '6.1.1'} }
+    let(:expression) { JSON.generate({'or' => [{'country' => 'iran'}, {'os_version' => '6.1.1'}]})}
+    it { is_expected.to be_truthy }
+  end
+
+  context 'complex expression' do
+    let(:data) { {'country' => 'usa',
+                  'os_version' => '6.1.1',
+                  'language' => 'english',
+                  'app_version' => '0.2'} }
+    let(:expression) { JSON.generate({'and' =>
+                                      [{'or' =>
+                                        [{'country' => 'usa'},
+                                         {'language' => 'spanish'}]},
+                                       {'not' =>
+                                         {'or' =>
+                                          [{'app_version' => '0.2'},
+                                           {'os_version' => '7.0.0'}]}}]}) }
+    it { is_expected.to be_falsy }
+  end
 end

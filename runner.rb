@@ -6,9 +6,12 @@ class Runner
 
   def data_matches_expression?(expression = nil)
     expression = @expression if expression.nil?
-    if expression.keys.first == 'and'
+    case expression.keys.first
+    when 'and'
       data_matches_expression?(expression.values.first.first) &&
       data_matches_expression?(expression.values.first.last)
+    when 'not'
+      !data_matches_expression?(expression.values.first)
     else
       @data[expression.keys.first] == expression.values.first
     end

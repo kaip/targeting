@@ -1,7 +1,10 @@
 How to run
 ==========
 * Install ruby
-* Run `ruby runner.rb` from the terminal with two JSON string arguments: data (a standard hash) and expression (see below for format)
+* git clone this repository
+* cd into the directory
+* Run `bundle`
+* Run `ruby runner.rb` with two JSON string arguments: data (a standard hash) and expression (see below for format)
 
 For example: `ruby runner.rb "{\"country\":\"usa\",\"os_version\":\"6.1.1\",\"language\":\"english\",\"app_version\":\"0.2\"}" "{\"and\":[{\"or\":[{\"=\":{\"country\":\"usa\"}},{\"=\":{\"language\":\"spanish\"}}]},{\"not\":[{\"or\":[{\"=\":{\"app_version\":\"0.2\"}},{\"=\":{\"os_version\":\"7.0.0\"}}]}]}]}"`
 

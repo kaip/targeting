@@ -7,7 +7,7 @@ For example: `ruby runner.rb "{\"country\":\"usa\",\"os_version\":\"6.1.1\",\"la
 
 Expression Format
 =================
-Expressions are JSON hashes of arrays of hashes
+Expressions are JSON hashes
 
 Leaf expressions should have the operator as the key and a hash with the key to check as the key and the value to compare as the value `{'>' => {'num_purchases' => 5}`
 

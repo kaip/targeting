@@ -16,4 +16,10 @@ describe Runner do
     let(:expression) { JSON.generate({country: 'iran'}) }
     it { is_expected.to be_falsy }
   end
+
+  context 'multivalue expression' do
+    let(:data) { {'country' => 'usa', 'os_version' => '6.1.1'} }
+    let(:expression) { JSON.generate({'and' => [{'country' => 'usa'}, {'os_version' => '6.1.1'}]}) }
+    it { is_expected.to be_truthy }
+  end
 end

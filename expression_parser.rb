@@ -10,7 +10,7 @@ class ExpressionParser
     root = expression.keys.first
     root_type = class_for(root)
     if root_type < LeafNode
-      root_type.new(expression.values.first.first)
+      root_type.new(expression.values.first)
     else
       expressions = expression.values.first.map do |expression|
         ExpressionParser.new(expression).parse

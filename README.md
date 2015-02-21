@@ -17,3 +17,9 @@ Leaf/equality expressions should have the key as the key and the value as the va
 
 So the expression `(((country == 'usa') or (language == 'spanish')) and (not ((app_version == '0.2') or (os_version == '7.0.0'))))` would be expressed as:
 `"{\"and\":[{\"or\":[{\"country\":\"usa\"},{\"language\":\"spanish\"}]},{\"not\":{\"or\":[{\"app_version\":\"0.2\"},{\"os_version\":\"7.0.0\"}]}}]}"`
+
+Notes
+=====
+This engine supports arbitrary values (just include them in the data and expression hash)
+
+It supports string, int, float, or boolean values

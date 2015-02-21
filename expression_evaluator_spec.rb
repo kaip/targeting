@@ -51,9 +51,27 @@ describe ExpressionEvaluator do
     it { is_expected.to be_falsy }
   end
 
-  context 'arbitrary values' do
+  context 'arbitrary properties' do
     let(:data) {{'purchase' => 'true'}}
-    let(:expression) {JSON.generate({'purchase' => 'true'})}
+    let(:expression) { JSON.generate({'purchase' => 'true'}) }
+    it { is_expected.to be_truthy }
+  end
+
+  context 'booleans' do
+    let(:data) {{'purchase' => true}}
+    let(:expression) { JSON.generate({'purchase' => true}) }
+    it { is_expected.to be_truthy }
+  end
+
+  context 'ints' do
+    let(:data) {{'num_purchases' => 5}}
+    let(:expression) { JSON.generate({'num_purchases' => 5}) }
+    it { is_expected.to be_truthy }
+  end
+
+  context 'floats' do
+    let(:data) {{'satisfaction' => 0.54}}
+    let(:expression) { JSON.generate({'satisfaction' => 0.54}) }
     it { is_expected.to be_truthy }
   end
 end

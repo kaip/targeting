@@ -8,14 +8,26 @@ class ExpressionParser
   def parse(expression = nil)
     expression ||= @expression
     root = expression.keys.first
-    if %w(and or not).include?(root)
-      # AndNode, OrNode, NotNode
+    root_type = class_for(root)
+    if root_type < LeafNode
+      root_type.new(expression.values.first.first)
+    else
       expressions = expression.values.first.map do |expression|
         ExpressionParser.new(expression).parse
       end
-      Object::const_get("#{root.capitalize}Node").new(expressions)
-    else
-      EqualityNode.new(*expression.to_a.first)
+      root_type.new(expressions)
     end
+  end
+
+  private
+  def class_for(root)
+    {
+      'and' => AndNode,
+      'or' => OrNode,
+      'not' => NotNode,
+      '>' => GreaterThanNode,
+      '<' => LessThanNode,
+      '=' => EqualityNode
+    }[root]
   end
 end

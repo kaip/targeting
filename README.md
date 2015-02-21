@@ -3,18 +3,18 @@ How to run
 * Install ruby
 * Run ruby runner.rb with two JSON string arguments: data (a standard hash) and expression (see below for format)
 
-For example: `ruby runner.rb "{\"country\":\"usa\",\"os_version\":\"6.1.1\",\"language\":\"english\",\"app_version\":\"0.2\"}" "{\"and\":[{\"or\":[{\"country\":\"usa\"},{\"language\":\"spanish\"}]},{\"not\":{\"or\":[{\"app_version\":\"0.2\"},{\"os_version\":\"7.0.0\"}]}}]}"`
+For example: `ruby runner.rb "{\"country\":\"usa\",\"os_version\":\"6.1.1\",\"language\":\"english\",\"app_version\":\"0.2\"}" "{\"and\":[{\"or\":[{\"=\":[{\"country\":\"usa\"}]},{\"=\":[{\"language\":\"spanish\"}]}]},{\"not\":[{\"or\":[{\"=\":[{\"app_version\":\"0.2\"}]},{\"=\":[{\"os_version\":\"7.0.0\"}]}]}]}]}"`
 
 Expression Format
 =================
 Expressions are JSON hashes of arrays of hashes
 
-Operator expressions should have the operator as the key and an array of hashes as the value `{'and' => [{'country' => 'usa'}, {'os_version' => '6.1.1'}]}`
+Operator expressions should have the operator as the key and an array of hashes as the value `{'and' => [{'=' => [{'country' => 'usa'}], {'=' => [{'os_version' => '6.1.1'}]]}`
 
-Leaf/equality expressions should have the key as the key and the value as the value `{'country' => 'usa'}`
+Leaf expressions should have the operator as the key and an array wrapped key/value hash as the value `{'=' => [{'country' => 'usa'}]`
 
 So the expression `(((country == 'usa') or (language == 'spanish')) and (not ((app_version == '0.2') or (os_version == '7.0.0'))))` would be expressed as:
-`"{\"and\":[{\"or\":[{\"country\":\"usa\"},{\"language\":\"spanish\"}]},{\"not\":{\"or\":[{\"app_version\":\"0.2\"},{\"os_version\":\"7.0.0\"}]}}]}"`
+`"{\"and\":[{\"or\":[{\"=\":[{\"country\":\"usa\"}]},{\"=\":[{\"language\":\"spanish\"}]}]},{\"not\":[{\"or\":[{\"=\":[{\"app_version\":\"0.2\"}]},{\"=\":[{\"os_version\":\"7.0.0\"}]}]}]}]}"`
 
 Notes
 =====
@@ -24,6 +24,6 @@ It supports string, int, float, or boolean properties
 
 It assumes properties not given in the data are nil, which is not the same as ''
 
-It supports the operators: and, or, not
+It supports the operators: and, or, not, =, >, <
 
-And/or can have arbitrary number of subexpressions: {'or' => [{'country' => 'usa'}, {'country' => 'canada'}, {'country' => 'england'}]} is equivalent to country == 'usa' or country == 'canada' or country == 'england'
+And/or can have arbitrary number of subexpressions: `{'or' => [{'=' => [{'country' => 'usa'}]}, {'=' => [{'country' => 'canada'}]}, {'=' => [{'country' => 'england'}]}]}` is equivalent to `country == 'usa' or country == 'canada' or country == 'england'`
